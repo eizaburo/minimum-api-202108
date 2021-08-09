@@ -27,19 +27,24 @@ const db = new sqlite3.Database("./test.db", (error) => {
 
 //CORS
 app.use((req, res, next) => {
+    // res.header("Content-Security-Policy", "default-src 'self'");
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "*");
     res.header("Access-Control-Allow-Headers", "*");
+    // res.header("X-Frame-Options", "SAMEORIGIN");
     next();
 });
 
-// /
+//
 app.get("/", (req, res) => {
     res.send("Welcome");
 });
 
 //
 app.post("/inquiry", (req, res) => {
+
+    console.log(JSON.stringify(req.body));
+
     const email = req.body.email;
     const body = req.body.body;
 
@@ -62,6 +67,6 @@ app.post("/inquiry", (req, res) => {
 });
 
 //Listen
-app.listen(3000, () => {
-    console.log("Start server on port 3000.");
+app.listen(3001, () => {
+    console.log("Start server on port 3001.");
 })
